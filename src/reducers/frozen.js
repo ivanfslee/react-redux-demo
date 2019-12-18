@@ -8,7 +8,12 @@
 // 1. current state, usually provide a default state - in this example, default state is empty array
 // 2. info that came from any action
 
-export default (state = [], action) => {
+const seedData = [
+    'Tv dinner',
+    'Pizza'
+]
+
+export default (state = [seedData], action) => {
     return state;
 }
 
