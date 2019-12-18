@@ -9,11 +9,25 @@
 // 2. info that came from any action
 
 const seedData = [
-    'Tv dinner',
-    'Pizza'
+    {
+        food: 'chicken',
+        quantity: 13
+    },
+    {
+        food: 'bacon',
+        quantity: 22
+    },
+    {
+        food: 'mahi mahi',
+        quantity: 21
+    },
+    {
+        food: 'pork',
+        quantity: 234
+    }
 ]
 
-export default (state = [seedData], action) => {
+export default (state = seedData, action) => {
     return state;
 }
 

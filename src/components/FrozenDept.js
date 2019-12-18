@@ -10,10 +10,17 @@ class FrozenDept extends Component {
 
 
     render() {
-        console.log(this.props.frozenData);
+        
+        //this.props.frozenData is from mapStateToProps which gets frozenData from redux store
+        const frozenInventory = this.props.frozenData.map((item, i) => {
+        return <li key={i}>{item.food} : {item.quantity}</li>
+        })
         return (
             <div>
                 <h1>Frozen Food Department</h1>
+                <ul>
+                    {frozenInventory}
+                </ul>
             </div>
         );
     }
@@ -29,7 +36,12 @@ console.log(connect);
 //  value will be a property/key in the rootReducer (that is, a piece of the redux store)
 function mapStateToProps(state) {
     return {
-        frozenData: state.frozen
+        //accessing anything in redux store here via key/prop name in rootReducer
+        frozenData: state.frozen,
+
+        //can access the other redux store state like so:
+        // meatData: state.meat,
+        // produceData: state.produce
     }
 }
 

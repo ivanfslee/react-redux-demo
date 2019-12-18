@@ -12,7 +12,9 @@
 import { combineReducers } from 'redux';
 
 // 2. get each individual reducer
-import frozenReducer from './frozen';
+import frozenReducer from './frozenReducer';
+import meatReducer from './meatReducer';
+import produceReducer from './produceReducer';
 
 //3. call combineReducer and hand it an obj
 // each key in combine Reducer will be a piece of state in the redux store
@@ -20,7 +22,9 @@ import frozenReducer from './frozen';
 
 //in our redux store, we will have a piece of state called frozen, with a value of what frozenReducer returns (in this case, state)
 const rootreducer = combineReducers({
-    frozen: frozenReducer
+    frozen: frozenReducer,
+    produce: produceReducer,
+    meat: meatReducer
 })
 
 export default rootreducer;
