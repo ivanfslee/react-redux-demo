@@ -28,7 +28,14 @@ const seedData = [
 ]
 
 export default (state = seedData, action) => {
-    return state;
+    if (action.type === 'updateProduce') {
+        const payload = action.payload;
+        const newState = [...state];
+        newState[payload.index].quantity += payload.operation;
+        return newState;
+    } else {
+        return state;
+    }
 }
 
 

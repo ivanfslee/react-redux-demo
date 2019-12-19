@@ -1,5 +1,9 @@
-export default () => {
+export default (operation, index) => {
     return {
-        type: 'updateMeat'
+        type: 'updateMeat',
+        payload: {
+            operation, 
+            index
+        }
     }
 }

@@ -6,16 +6,13 @@ import React, { Component } from 'react';
 // Connect connects app at the component level
 import { connect } from 'react-redux';
 import updateProduce from '../actions/produceInvUpdate';
+import { bindActionCreators } from 'redux';
 
 class ProduceDept extends Component {
 
     increment = (operation, index) => {
         // console.log(operation, index);
-        if (operation === '+') {
-            updateProduce();
-        } else if (operation === '-') {
-            
-        }
+        this.props.updateProduce(operation, index);
     }
 
     render() {
@@ -24,8 +21,8 @@ class ProduceDept extends Component {
             return (
                 <div key={i}>
                     <li>{item.food} : {item.quantity}</li>
-                    <input type="button" onClick={() => this.increment('+', i)} value="+" />
-                    <input type="button" onClick={() => this.increment('-', i)} value="-" />
+                    <input type="button" onClick={() => this.increment(1, i)} value="+" />
+                    <input type="button" onClick={() => this.increment(-1, i)} value="-" />
                 </div>
             )      
         })
@@ -59,5 +56,11 @@ function mapStateToProps(state) {
     }
 }
 
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({
+        updateProduce: updateProduce
+    }, dispatch)
+}
+
 // export default FrozenDept;
-export default connect(mapStateToProps)(ProduceDept);
+export default connect(mapStateToProps, mapDispatchToProps)(ProduceDept);

@@ -28,11 +28,16 @@ const seedData = [
 ]
 
 export default (state = seedData, action) => {
-    return state;
+    if (action.type === 'updateMeat') {
+        const newState = [...state];
+        const payload = action.payload;
+        if (payload.operation === '+') {
+            newState[payload.index].quantity++;
+        } else if (payload.operation === '-') {
+            newState[payload.index].quantity--;
+        }
+        return newState;
+    } else {
+        return state;
+    }   
 }
-
-
-// function frozen(state = [], action) {
-//     return state;
-// }
-// export default frozen;

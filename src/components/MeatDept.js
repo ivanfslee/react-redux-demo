@@ -6,16 +6,13 @@ import React, { Component } from 'react';
 // Connect connects app at the component level
 import { connect } from 'react-redux';
 import updateMeat from '../actions/meatInvUpdate';
+import { bindActionCreators } from 'redux';
 
 class MeatDept extends Component {
 
     increment = (operation, index) => {
         // console.log(operation, index);
-        if (operation === '+') {
-
-        } else if (operation === '-') {
-            
-        }
+        this.props.updateMeat(operation, index);
     }
 
     render() {
@@ -59,5 +56,11 @@ function mapStateToProps(state) {
     }
 }
 
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({
+        updateMeat: updateMeat
+    }, dispatch)
+}
+
 // export default FrozenDept;
-export default connect(mapStateToProps)(MeatDept);
+export default connect(mapStateToProps, mapDispatchToProps)(MeatDept);
