@@ -5,15 +5,29 @@ import React, { Component } from 'react';
 // Provider connects app to redux at the app level
 // Connect connects app at the component level
 import { connect } from 'react-redux';
+import updateProduce from '../actions/produceInvUpdate';
 
 class ProduceDept extends Component {
 
+    increment = (operation, index) => {
+        // console.log(operation, index);
+        if (operation === '+') {
+            updateProduce();
+        } else if (operation === '-') {
+            
+        }
+    }
 
     render() {
-        
         //this.props.frozenData is from mapStateToProps which gets frozenData from redux store
         const produceInventory = this.props.produceData.map((item, i) => {
-        return <li key={i}>{item.food} : {item.quantity}</li>
+            return (
+                <div key={i}>
+                    <li>{item.food} : {item.quantity}</li>
+                    <input type="button" onClick={() => this.increment('+', i)} value="+" />
+                    <input type="button" onClick={() => this.increment('-', i)} value="-" />
+                </div>
+            )      
         })
         return (
             <div>

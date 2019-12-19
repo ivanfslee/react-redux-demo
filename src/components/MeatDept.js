@@ -5,15 +5,29 @@ import React, { Component } from 'react';
 // Provider connects app to redux at the app level
 // Connect connects app at the component level
 import { connect } from 'react-redux';
+import updateMeat from '../actions/meatInvUpdate';
 
 class MeatDept extends Component {
 
+    increment = (operation, index) => {
+        // console.log(operation, index);
+        if (operation === '+') {
+
+        } else if (operation === '-') {
+            
+        }
+    }
 
     render() {
-        
         //this.props.frozenData is from mapStateToProps which gets frozenData from redux store
         const meatInventory = this.props.meatData.map((item, i) => {
-        return <li key={i}>{item.food} : {item.quantity}</li>
+            return (
+                <div key={i}>
+                    <li>{item.food} : {item.quantity}</li>
+                    <input type="button" onClick={() => this.increment('+', i)} value="+" />
+                    <input type="button" onClick={() => this.increment('-', i)} value="-" />
+                </div>
+            )      
         })
         return (
             <div>
