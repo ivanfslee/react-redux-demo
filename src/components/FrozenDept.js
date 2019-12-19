@@ -6,16 +6,13 @@ import React, { Component } from 'react';
 // Connect connects app at the component level
 import { connect } from 'react-redux';
 import updateFrozen from '../actions/frozenInvUpdate';
+import { bindActionCreators } from 'redux';
 
 class FrozenDept extends Component {
 
     increment = (operation, index) => {
         // console.log(operation, index);
-        if (operation === '+') {
-            console.log(updateFrozen());
-        } else if (operation === '-') {
-
-        }
+        this.props.updateFrozen(operation, index);
     }
 
     render() {
@@ -59,5 +56,22 @@ function mapStateToProps(state) {
     }
 }
 
+//mapDispatchToProps is how we tie our component to the dispatch
+//takes 1 arg: dispatch
+function mapDispatchToProps(dispatch) {
+    //this function returns, bindActionCreators
+    //we hand bindActionCreators an obj
+    //each property will be a local prop
+    //each value will be a function that is dispatched when run 
+    //second arg for bindActionCreators is the dispatch
+    return bindActionCreators({
+        updateFrozen: updateFrozen
+    }, dispatch)
+}
+
+
 // export default FrozenDept;
-export default connect(mapStateToProps)(FrozenDept);
+//connect takes 2 args -
+//first arg is a function that maps piece of redux state to this components props
+//second arg to connect is mapDispatchToProps
+export default connect(mapStateToProps, mapDispatchToProps)(FrozenDept);

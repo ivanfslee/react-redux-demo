@@ -6,8 +6,12 @@
 //no redux here - it is just a straight-up function
 //a function that returns an obj
 
-export default () => {
+export default (operation, index) => {
     return {
-        type: 'updateFrozen'
+        type: 'updateFrozen', 
+        payload: {
+            operation,
+            index
+        }
     }
 }
