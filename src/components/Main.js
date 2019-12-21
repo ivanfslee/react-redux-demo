@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import clearInventory from '../actions/clearInventory';
+import { bindActionCreators } from 'redux';
 
 class Main extends Component {
-    render() {
-        console.log(this.props.produceData);
+    // clearInventoryAction = () => {
+    //     this.props.clearInventory();
+    // }
 
+
+    render() {
+        // console.log(this.props.produceData);
+        // this.props.clearInventory();
         const produceInventory = this.props.produceData.map((item, i) => {
             return (
                 <div key={i}>
@@ -32,7 +39,7 @@ class Main extends Component {
         const frozenQuantity = this.props.frozenData.reduce((accum, frozenItem) => accum + frozenItem.quantity, 0)
         const meatQuantity = this.props.meatData.reduce((accum, meatItem) => accum + meatItem.quantity, 0)
         const produceQuantity = this.props.produceData.reduce((accum, produceItem) => accum + produceItem.quantity, 0)
-        
+
         return (
             <div>
                 <h1>Produce Dept: </h1>
@@ -46,7 +53,7 @@ class Main extends Component {
                 <h1>Meat Dept: </h1>
                 {meatInventory}
                 <h2>Meat Dept Total: {meatQuantity}</h2>
-                
+                <button onClick={this.props.clearInventory}>Clear All Inventory</button>
             </div>
         );
     }
@@ -60,4 +67,10 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(Main);
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({
+        clearInventory: clearInventory
+    }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

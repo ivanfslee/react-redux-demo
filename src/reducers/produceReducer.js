@@ -30,8 +30,14 @@ const seedData = [
 export default (state = seedData, action) => {
     if (action.type === 'updateProduce') {
         const payload = action.payload;
-        const newState = [...state];
+        let newState = [...state];
         newState[payload.index].quantity += payload.operation;
+        return newState;
+    } else if (action.type === 'clearInventory') {
+        let newState = [...state];
+        newState.forEach((item, i) => {
+            item.quantity = 0;
+        })
         return newState;
     } else {
         return state;

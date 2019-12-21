@@ -27,7 +27,7 @@ export default (state = seedData, action) => {
     if (action.type === 'updateFrozen') {
         console.log('I care about this action');
         //we make a copy of state, because we NEVER mutate state directly
-        const newState = [...state];
+        let newState = [...state];
         
         //grab the index and corresponding obj in state and modify the quantity
         if (action.payload.operation === '+') {
@@ -35,6 +35,12 @@ export default (state = seedData, action) => {
         } else if (action.payload.operation === '-') {
             newState[action.payload.index].quantity -= 1
         }
+        return newState;
+    } else if (action.type === 'clearInventory') {
+        let newState = [...state];
+        newState.forEach((item, i) => {
+            item.quantity = 0;
+        })
         return newState;
     } else {
         return state;
